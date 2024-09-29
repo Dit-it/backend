@@ -2,15 +2,14 @@ package com.example.backend.entity;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 @Getter
 @Setter
+@ToString @EqualsAndHashCode
 @NoArgsConstructor
 @Entity
-public class TypesOfLiter {
+public class TypesOfLitter {
     @Id
     private String litterTypeCode;
     private String litterTypeName;
