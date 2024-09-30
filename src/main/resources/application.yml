@@ -2,7 +2,7 @@ spring:
   application:
     name: did-it-backend
   datasource:
-    url: jdbc:postgresql://localhost:5432/postgres
+    url: jdbc:postgresql://121.170.121.187:5432/postgres
     username: postgres
     password: 1234
   sql:
