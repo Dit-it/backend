@@ -30,7 +30,7 @@ public class CleanupDataRepositoryQdslImpl implements CleanupDataRepositoryQdsl 
         DateTemplate<Date> cleanupDateTemplate = Expressions.dateTemplate(Date.class, "DATE({0})", cleanupData.cleanupDt);
 
 
-        // 시군코드, 시군이름, 일자, 해안코드, 해안명, 수거량
+        // 시군코드, 시군이름, 일자, 해안코드, 해안명, 해안폴리곤, 수거량
         return jpaQueryFactory.select(
                         Projections.constructor(CleanupDataGroupBySigunguResponseDto.class
                         , sigunguInfo.sigunguCode
@@ -38,6 +38,7 @@ public class CleanupDataRepositoryQdslImpl implements CleanupDataRepositoryQdsl 
                         , cleanupDateTemplate.as("cleanupDate") // 여기서 DateTemplate 사용
                         , coastManageInfo.coastCode
                         , coastManageInfo.coastName
+                        , coastManageInfo.coastGeom
                         , cleanupData.totalCleanupLitter.sum().as("totalCleanupLitter")
                         ))
                 .from(cleanupData)

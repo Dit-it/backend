@@ -28,6 +28,7 @@ public class CleanupDataController {
     ){
 
         List<CleanupDataGroupBySigunguResponseDto> cleanupData = cleanupDataService.cleanupDataGroupBySigungu(new CleanupDataGroupBySigunguRequestDto(startDate, endDate));
+        System.out.println("cleanupData = " + cleanupData);
         return ResponseEntity.ok().body(cleanupData);
     }
 
