@@ -9,7 +9,7 @@ import java.time.LocalDate;
 @ToString
 @NoArgsConstructor
 @AllArgsConstructor
-public class CleanupDataGroupBySigunguRequestDto {
+public class CleanupStatsDataRequestDto {
 
     private LocalDate startDate;
     private LocalDate endDate;

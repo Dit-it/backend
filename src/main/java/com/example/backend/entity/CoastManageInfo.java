@@ -1,8 +1,10 @@
 package com.example.backend.entity;
 
 import jakarta.persistence.*;
+import lombok.Getter;
 import org.locationtech.jts.geom.Geometry;
 
+@Getter
 @Entity
 public class CoastManageInfo {
 

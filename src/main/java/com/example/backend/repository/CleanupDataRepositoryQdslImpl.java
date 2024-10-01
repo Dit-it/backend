@@ -1,6 +1,6 @@
 package com.example.backend.repository;
 
-import com.example.backend.dto.CleanupDataGroupBySigunguRequestDto;
+import com.example.backend.dto.CleanupStatsDataRequestDto;
 
 import com.example.backend.dto.CleanupDataGroupBySigunguResponseDto;
 import static com.example.backend.entity.QCleanupData.cleanupData;
@@ -23,14 +23,18 @@ import java.util.List;
 public class CleanupDataRepositoryQdslImpl implements CleanupDataRepositoryQdsl {
 
     private final JPAQueryFactory jpaQueryFactory;
+    DateTemplate<Date> cleanupDateTemplate = Expressions.dateTemplate(Date.class, "DATE({0})", cleanupData.cleanupDt);
+
 
     @Override
-    public List<CleanupDataGroupBySigunguResponseDto> cleanupDataGroupBySigungu(CleanupDataGroupBySigunguRequestDto cleanupDataGroupBySigunguRequestDto) {
+    public List<CleanupDataGroupBySigunguResponseDto> cleanupDataGroupBySigungu(CleanupStatsDataRequestDto cleanupStatsDataRequestDto) {
 
-        DateTemplate<Date> cleanupDateTemplate = Expressions.dateTemplate(Date.class, "DATE({0})", cleanupData.cleanupDt);
+        DateTemplate<Date> startDate = Expressions.dateTemplate(Date.class, "DATE({0})", cleanupStatsDataRequestDto.getStartDate());
+        DateTemplate<Date> endDate = Expressions.dateTemplate(Date.class, "DATE({0})", cleanupStatsDataRequestDto.getEndDate());
 
 
-        // 시군코드, 시군이름, 일자, 해안코드, 해안명, 수거량
+
+        // 시군코드, 시군이름, 일자, 해안코드, 해안명, 해안폴리곤, 수거량
         return jpaQueryFactory.select(
                         Projections.constructor(CleanupDataGroupBySigunguResponseDto.class
                         , sigunguInfo.sigunguCode
@@ -38,14 +42,15 @@ public class CleanupDataRepositoryQdslImpl implements CleanupDataRepositoryQdsl 
                         , cleanupDateTemplate.as("cleanupDate") // 여기서 DateTemplate 사용
                         , coastManageInfo.coastCode
                         , coastManageInfo.coastName
+                        , coastManageInfo.coastGeom
                         , cleanupData.totalCleanupLitter.sum().as("totalCleanupLitter")
                         ))
                 .from(cleanupData)
                 .join(observedData).on(cleanupData.observedDataId.eq(observedData))
                 .join(coastManageInfo).on(observedData.coastCode.eq(coastManageInfo))
                 .join(sigunguInfo).on(coastManageInfo.sigunguCode.eq(sigunguInfo))
-                .where(cleanupDateTemplate.goe(Date.valueOf(cleanupDataGroupBySigunguRequestDto.getStartDate())),
-                        cleanupDateTemplate.loe(Date.valueOf(cleanupDataGroupBySigunguRequestDto.getEndDate())))
+                .where(cleanupDateTemplate.goe(startDate),
+                        cleanupDateTemplate.loe(endDate))
                 .groupBy(
                         sigunguInfo.sigunguCode
                         , sigunguInfo.sigunguName
@@ -56,4 +61,5 @@ public class CleanupDataRepositoryQdslImpl implements CleanupDataRepositoryQdsl 
                 .fetch();
 
     }
+
 }
