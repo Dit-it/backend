@@ -1,7 +1,8 @@
 package com.example.backend.controller;
 
 import com.example.backend.dto.CleanupStatsDataRequestDto;
-import com.example.backend.dto.CleanupDataGroupBySigunguResponseDto;
+import com.example.backend.dto.CleanupDataGroupByCoastResponseDto;
+import com.example.backend.dto.MajorTypeOfLitterGroupByCoastResponseDto;
 import com.example.backend.dto.TotalCleanupLitterGroupBySigunguResponseDto;
 import com.example.backend.service.CleanupDataService;
 import lombok.RequiredArgsConstructor;
@@ -27,7 +28,7 @@ public class CleanupDataController {
             , @PathVariable @DateTimeFormat(pattern = "yyyy-mm-dd") LocalDate endDate
     ){
 
-        List<CleanupDataGroupBySigunguResponseDto> cleanupData = cleanupDataService.cleanupDataGroupBySigungu(new CleanupStatsDataRequestDto(startDate, endDate));
+        List<CleanupDataGroupByCoastResponseDto> cleanupData = cleanupDataService.cleanupDataGroupBySigungu(new CleanupStatsDataRequestDto(startDate, endDate));
         System.out.println("cleanupData = " + cleanupData);
         return ResponseEntity.ok().body(cleanupData);
     }
@@ -39,6 +40,17 @@ public class CleanupDataController {
     ){
 
         List<TotalCleanupLitterGroupBySigunguResponseDto> cleanupData = cleanupDataService.totalCollectedLitterByCoast(new CleanupStatsDataRequestDto(startDate, endDate));
+        System.out.println("cleanupData = " + cleanupData);
+        return ResponseEntity.ok().body(cleanupData);
+    }
+
+    @GetMapping("/MajorTypeOfLitterGroupByCoast/{startDate}/{endDate}")
+    public ResponseEntity<?> MajorTypeOfLitterGroupByCoast(
+            @PathVariable @DateTimeFormat(pattern = "yyyy-mm-dd") LocalDate startDate
+            , @PathVariable @DateTimeFormat(pattern = "yyyy-mm-dd") LocalDate endDate
+    ){
+
+        List<MajorTypeOfLitterGroupByCoastResponseDto> cleanupData = cleanupDataService.MajorTypeOfLitterGroupByCoast(new CleanupStatsDataRequestDto(startDate, endDate));
         System.out.println("cleanupData = " + cleanupData);
         return ResponseEntity.ok().body(cleanupData);
     }
