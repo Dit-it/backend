@@ -1,8 +1,8 @@
 package com.example.backend.controller;
 
-import com.example.backend.dto.CleanupDataGroupBySigunguRequestDto;
+import com.example.backend.dto.CleanupStatsDataRequestDto;
 import com.example.backend.dto.CleanupDataGroupBySigunguResponseDto;
-import com.example.backend.entity.CleanupData;
+import com.example.backend.dto.TotalCleanupLitterGroupBySigunguResponseDto;
 import com.example.backend.service.CleanupDataService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -27,7 +27,18 @@ public class CleanupDataController {
             , @PathVariable @DateTimeFormat(pattern = "yyyy-mm-dd") LocalDate endDate
     ){
 
-        List<CleanupDataGroupBySigunguResponseDto> cleanupData = cleanupDataService.cleanupDataGroupBySigungu(new CleanupDataGroupBySigunguRequestDto(startDate, endDate));
+        List<CleanupDataGroupBySigunguResponseDto> cleanupData = cleanupDataService.cleanupDataGroupBySigungu(new CleanupStatsDataRequestDto(startDate, endDate));
+        System.out.println("cleanupData = " + cleanupData);
+        return ResponseEntity.ok().body(cleanupData);
+    }
+
+    @GetMapping("/totalCollectedLitterByCoast/{startDate}/{endDate}")
+    public ResponseEntity<?> totalCollectedLitterByCoast(
+            @PathVariable @DateTimeFormat(pattern = "yyyy-mm-dd") LocalDate startDate
+            , @PathVariable @DateTimeFormat(pattern = "yyyy-mm-dd") LocalDate endDate
+    ){
+
+        List<TotalCleanupLitterGroupBySigunguResponseDto> cleanupData = cleanupDataService.totalCollectedLitterByCoast(new CleanupStatsDataRequestDto(startDate, endDate));
         System.out.println("cleanupData = " + cleanupData);
         return ResponseEntity.ok().body(cleanupData);
     }
