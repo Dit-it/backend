@@ -24,5 +24,9 @@ logging:
           descriptor:
             sql: trace
 
+file:
+  path:
+    img: /img
+
 server:
   port: 8080
