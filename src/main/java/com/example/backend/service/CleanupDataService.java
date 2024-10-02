@@ -14,4 +14,6 @@ public interface CleanupDataService {
     boolean saveCleanupData(SaveCleanupDataRequestDTO dto, String memberId);
 
     List<MajorTypeOfLitterGroupByCoastResponseDto> MajorTypeOfLitterGroupByCoast(CleanupStatsDataRequestDto cleanupStatsDataRequestDto);
+
+    boolean collectCleanup(Integer cleanupDataId, String driverMemberId);
 }

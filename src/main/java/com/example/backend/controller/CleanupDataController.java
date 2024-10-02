@@ -63,4 +63,11 @@ public class CleanupDataController {
         return ResponseEntity.ok().body(result);
     }
 
+    @PutMapping("/collect/{cleanupDataId}")
+    public ResponseEntity<?> collectCleanup(@PathVariable(name = "cleanupDataId") int cleanupDataId) {
+//      TODO: get userId from jwt after login finished
+        boolean result = cleanupDataService.collectCleanup(cleanupDataId, "user06");
+        return ResponseEntity.ok().body(result);
+    }
+
 }

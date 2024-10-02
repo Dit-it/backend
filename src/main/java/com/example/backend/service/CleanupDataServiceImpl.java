@@ -80,4 +80,18 @@ public class CleanupDataServiceImpl implements CleanupDataService {
             return false;
         }
     }
+
+    @Override
+    public boolean collectCleanup(Integer cleanupDataId, String driverMemberId) {
+        try {
+            CleanupData cleanupData = cleanupDataRepository.findById(cleanupDataId).orElseThrow(NoSuchElementException::new);
+            cleanupData.setCollectionStatus(true);
+            MemberInfo driverMemberInfo = memberInfoRepository.findById(driverMemberId).orElseThrow(NoSuchElementException::new);
+            cleanupData.setDriverMemberId(driverMemberInfo);
+            cleanupDataRepository.save(cleanupData);
+            return true;
+        } catch (NoSuchElementException e) {
+            return false;
+        }
+    }
 }

@@ -40,4 +40,7 @@ public class CleanupData {
     private TypesOfLitter cleanupMajorLitter;
     private boolean collectionStatus;
     private String collectionLocationMemo;
+    @ManyToOne
+    @JoinColumn(name="driver_member_id")
+    private MemberInfo driverMemberId;
 }
