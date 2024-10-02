@@ -22,6 +22,6 @@ public class ObservedData {
     private String observedPicture;
     private LocalDateTime observedDt;
     @ManyToOne
-    @JoinColumn(name = "cleanup_major_litter")
-    private TypesOfLitter cleanupMajorLitter;
+    @JoinColumn(name = "observed_major_litter")
+    private TypesOfLitter observedMajorLitter;
 }

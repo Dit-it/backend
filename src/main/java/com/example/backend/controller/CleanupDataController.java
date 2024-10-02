@@ -2,6 +2,7 @@ package com.example.backend.controller;
 
 import com.example.backend.dto.CleanupStatsDataRequestDto;
 import com.example.backend.dto.CleanupDataGroupBySigunguResponseDto;
+import com.example.backend.dto.SaveCleanupDataRequestDTO;
 import com.example.backend.dto.TotalCleanupLitterGroupBySigunguResponseDto;
 import com.example.backend.service.CleanupDataService;
 import lombok.RequiredArgsConstructor;
@@ -43,5 +44,15 @@ public class CleanupDataController {
         return ResponseEntity.ok().body(cleanupData);
     }
 
+    /**
+     * @param dto requestDTO
+     * @return save result
+     */
+    @PostMapping("")
+    public ResponseEntity<?> saveCleanupData(SaveCleanupDataRequestDTO dto) {
+//      TODO: get userId from jwt after login finished
+        boolean result = cleanupDataService.saveCleanupData(dto, "user01");
+        return ResponseEntity.ok().body(result);
+    }
 
 }

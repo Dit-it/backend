@@ -1,0 +1,4 @@
+# set your img save absolute directory
+file:
+  path:
+    img: /home/jhlee9462/IdeaProjects/did-it-backend/img
