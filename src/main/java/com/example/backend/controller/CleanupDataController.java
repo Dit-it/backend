@@ -70,4 +70,10 @@ public class CleanupDataController {
         return ResponseEntity.ok().body(result);
     }
 
+    @GetMapping("/uncollected")
+    public ResponseEntity<?> getAllUncollectedCleanupData() {
+        List<UncollectedCleanupDataResponseDTO> uncollectedCleanupDataResponseDTOList = cleanupDataService.getAllUncollectedCleanupData();
+        return ResponseEntity.ok().body(uncollectedCleanupDataResponseDTOList);
+    }
+
 }

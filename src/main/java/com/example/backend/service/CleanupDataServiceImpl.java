@@ -94,4 +94,10 @@ public class CleanupDataServiceImpl implements CleanupDataService {
             return false;
         }
     }
+
+    @Override
+    public List<UncollectedCleanupDataResponseDTO> getAllUncollectedCleanupData() {
+        List<CleanupData> cleanupDataList = cleanupDataRepository.findAllByCollectionStatusFalse();
+        return cleanupDataList.stream().map(UncollectedCleanupDataResponseDTO::new).toList();
+    }
 }

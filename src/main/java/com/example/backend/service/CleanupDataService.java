@@ -16,4 +16,6 @@ public interface CleanupDataService {
     List<MajorTypeOfLitterGroupByCoastResponseDto> MajorTypeOfLitterGroupByCoast(CleanupStatsDataRequestDto cleanupStatsDataRequestDto);
 
     boolean collectCleanup(Integer cleanupDataId, String driverMemberId);
+
+    List<UncollectedCleanupDataResponseDTO> getAllUncollectedCleanupData();
 }
