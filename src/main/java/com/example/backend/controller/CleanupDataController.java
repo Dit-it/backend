@@ -1,11 +1,6 @@
 package com.example.backend.controller;
 
-import com.example.backend.dto.CleanupStatsDataRequestDto;
-import com.example.backend.dto.CleanupDataGroupBySigunguResponseDto;
-import com.example.backend.dto.SaveCleanupDataRequestDTO;
-import com.example.backend.dto.CleanupDataGroupByCoastResponseDto;
-import com.example.backend.dto.MajorTypeOfLitterGroupByCoastResponseDto;
-import com.example.backend.dto.TotalCleanupLitterGroupBySigunguResponseDto;
+import com.example.backend.dto.*;
 import com.example.backend.service.CleanupDataService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
