@@ -9,7 +9,7 @@ import java.sql.Date;
 @NoArgsConstructor
 @AllArgsConstructor
 @ToString
-public class CleanupDataGroupBySigunguResponseDto {
+public class CleanupDataGroupByCoastResponseDto {
 
     private String sigunguCode;
     private String sigunguName;

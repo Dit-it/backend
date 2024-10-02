@@ -3,6 +3,8 @@ package com.example.backend.service;
 import com.example.backend.dto.CleanupStatsDataRequestDto;
 import com.example.backend.dto.CleanupDataGroupBySigunguResponseDto;
 import com.example.backend.dto.SaveCleanupDataRequestDTO;
+import com.example.backend.dto.CleanupDataGroupByCoastResponseDto;
+import com.example.backend.dto.MajorTypeOfLitterGroupByCoastResponseDto;
 import com.example.backend.dto.TotalCleanupLitterGroupBySigunguResponseDto;
 import com.example.backend.entity.CleanupData;
 import com.example.backend.entity.MemberInfo;
@@ -32,7 +34,7 @@ public class CleanupDataServiceImpl implements CleanupDataService {
     private final ImageHandler imageHandler;
 
     @Override
-    public List<CleanupDataGroupBySigunguResponseDto> cleanupDataGroupBySigungu(CleanupStatsDataRequestDto cleanupStatsDataRequestDto) {
+    public List<CleanupDataGroupByCoastResponseDto> cleanupDataGroupBySigungu(CleanupStatsDataRequestDto cleanupStatsDataRequestDto) {
         return cleanupDataRepositoryQdsl.cleanupDataGroupBySigungu(cleanupStatsDataRequestDto);
     }
 
@@ -45,6 +47,11 @@ public class CleanupDataServiceImpl implements CleanupDataService {
                         .stream().map(TotalCleanupLitterGroupBySigunguResponseDto::new).toList();
         System.out.println("totalCleanupLitterGroupBySigunguResponseDtos = " + totalCleanupLitterGroupBySigunguResponseDtos);
         return totalCleanupLitterGroupBySigunguResponseDtos;
+    }
+
+    @Override
+    public List<MajorTypeOfLitterGroupByCoastResponseDto> MajorTypeOfLitterGroupByCoast(CleanupStatsDataRequestDto cleanupStatsDataRequestDto) {
+        return cleanupDataRepositoryQdsl.MajorTypeOfLitterGroupByCoast(cleanupStatsDataRequestDto);
     }
 
     @Override
