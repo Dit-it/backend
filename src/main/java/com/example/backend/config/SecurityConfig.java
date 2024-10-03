@@ -5,7 +5,6 @@ import com.example.backend.util.JwtTokenProvider;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
@@ -31,13 +30,15 @@ public class SecurityConfig {
                 .httpBasic(AbstractHttpConfigurer::disable)
                 //세션 사용하지 않음
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
-                //모든 요청 허가
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers(new AntPathRequestMatcher("/**")).permitAll()
+                        //로그인에 대해 모든 요청 허가
+                        .requestMatchers(new AntPathRequestMatcher("/login")).permitAll()
+                        //이외에는 권한 있어야 가능
+                        .requestMatchers(new AntPathRequestMatcher("/login/test")).hasRole("R01")
+                        .anyRequest().authenticated()
                 )
                 //UsernamePasswordAuthenticationFilter 전에 JwtAuthenticationFilter 실행
-                .httpBasic(Customizer.withDefaults())
-                .addFilterBefore(new JwtAuthenticationFilter(jwtTokenProvider), UsernamePasswordAuthenticationFilter.class).build();
+                .addFilterBefore(new JwtAuthenticationFilter(jwtTokenProvider), UsernamePasswordAuthenticationFilter.class);
 
         return http.build();
     }
