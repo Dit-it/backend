@@ -1,9 +1,6 @@
 package com.example.backend.dto;
 
-import jakarta.persistence.Entity;
 import lombok.*;
-
-import java.util.List;
 
 @ToString
 @Getter

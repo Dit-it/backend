@@ -20,7 +20,6 @@ public class GeometryConverter {
         // WKT로 변환 후 JTS Geometry로 변환
         try {
             String wkt = geolatteGeometry.toString().substring(10); // Geolatte Geometry를 WKT 문자열로 변환
-            System.out.println("wkt = " + wkt);
             WKTReader reader = new WKTReader(geometryFactory);
             return reader.read(wkt); // WKT 문자열을 JTS Geometry로 변환
         } catch (Exception e) {
