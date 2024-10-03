@@ -1,5 +1,7 @@
 package com.example.backend.service;
 
+import com.example.backend.dto.ObservedMajorTypeOfLitterGroupByCoastResponseDTO;
+import com.example.backend.dto.ObservedMajorTypeOfLitterGroupByCoastResponseInterface;
 import com.example.backend.dto.RegisterObservedDataRequestDTO;
 import com.example.backend.entity.CoastManageInfo;
 import com.example.backend.entity.MemberInfo;
@@ -14,6 +16,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.io.IOException;
+import java.time.LocalDate;
+import java.util.List;
 
 @Service
 @RequiredArgsConstructor
@@ -54,5 +58,16 @@ public class ObservedDataServiceImpl implements ObservedDataService {
         }
 
         return observedDataRepository.save(regData);
+    }
+
+    @Override
+    public List<ObservedMajorTypeOfLitterGroupByCoastResponseDTO> searchObservedMajorLitterByCoast(LocalDate startDate, LocalDate endDate) {
+
+        List<ObservedMajorTypeOfLitterGroupByCoastResponseDTO> dtoList =
+                observedDataRepository.searchObservedMajorLitterByCoast(startDate, endDate)
+                .stream().map(ObservedMajorTypeOfLitterGroupByCoastResponseDTO::new)
+                .toList();
+
+        return dtoList;
     }
 }
