@@ -24,6 +24,7 @@ public class CleanupDataController {
             @PathVariable @DateTimeFormat(pattern = "yyyy-mm-dd") LocalDate startDate
             , @PathVariable @DateTimeFormat(pattern = "yyyy-mm-dd") LocalDate endDate
     ){
+        log.info("/api/v1/cleanup/cleanupDataGroupBySigungu/{}/{} - GET !!", startDate, endDate);
 
         List<CleanupDataGroupByCoastResponseDto> cleanupData = cleanupDataService.cleanupDataGroupBySigungu(new CleanupStatsDataRequestDto(startDate, endDate));
         System.out.println("cleanupData = " + cleanupData);
@@ -35,6 +36,7 @@ public class CleanupDataController {
             @PathVariable @DateTimeFormat(pattern = "yyyy-mm-dd") LocalDate startDate
             , @PathVariable @DateTimeFormat(pattern = "yyyy-mm-dd") LocalDate endDate
     ){
+        log.info("/api/v1/cleanup/totalCollectedLitterByCoast/{}/{} - GET !!", startDate, endDate);
 
         List<TotalCleanupLitterGroupBySigunguResponseDto> cleanupData = cleanupDataService.totalCollectedLitterByCoast(new CleanupStatsDataRequestDto(startDate, endDate));
         System.out.println("cleanupData = " + cleanupData);
@@ -46,6 +48,7 @@ public class CleanupDataController {
             @PathVariable @DateTimeFormat(pattern = "yyyy-mm-dd") LocalDate startDate
             , @PathVariable @DateTimeFormat(pattern = "yyyy-mm-dd") LocalDate endDate
     ){
+        log.info("/api/v1/cleanup/MajorTypeOfLitterGroupByCoast/{}/{} - GET !!", startDate, endDate);
 
         List<MajorTypeOfLitterGroupByCoastResponseDto> cleanupData = cleanupDataService.MajorTypeOfLitterGroupByCoast(new CleanupStatsDataRequestDto(startDate, endDate));
         System.out.println("cleanupData = " + cleanupData);

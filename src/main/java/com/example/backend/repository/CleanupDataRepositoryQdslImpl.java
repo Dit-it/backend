@@ -74,8 +74,11 @@ public class CleanupDataRepositoryQdslImpl implements CleanupDataRepositoryQdsl 
         // 시군이름, 해안이름, 쓰레기종류, 수거량
         return jpaQueryFactory.select(
                         Projections.constructor(MajorTypeOfLitterGroupByCoastResponseDto.class
+                                , sigunguInfo.sigunguCode
                                 , sigunguInfo.sigunguName
+                                , coastManageInfo.coastCode
                                 , coastManageInfo.coastName
+                                , coastManageInfo.coastGeom
                                 , typesOfLitter.litterTypeName
                                 , cleanupData.totalCleanupLitter.sum().as("totalCleanupLitter")
                         ))
@@ -87,8 +90,11 @@ public class CleanupDataRepositoryQdslImpl implements CleanupDataRepositoryQdsl 
                 .where(cleanupDateTemplate.goe(startDate),
                         cleanupDateTemplate.loe(endDate))
                 .groupBy(
-                        sigunguInfo.sigunguName
+                        sigunguInfo.sigunguCode
+                        , sigunguInfo.sigunguName
+                        , coastManageInfo.coastCode
                         , coastManageInfo.coastName
+                        , coastManageInfo.coastGeom
                         , typesOfLitter.litterTypeName
                 )
                 .fetch();
