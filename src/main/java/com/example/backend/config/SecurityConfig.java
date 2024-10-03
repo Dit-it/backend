@@ -34,7 +34,8 @@ public class SecurityConfig {
                         //로그인에 대해 모든 요청 허가
                         .requestMatchers(new AntPathRequestMatcher("/login")).permitAll()
                         //이외에는 권한 있어야 가능
-                        .requestMatchers(new AntPathRequestMatcher("/login/test")).hasRole("R01")
+//                        .requestMatchers(new AntPathRequestMatcher("/login/test")).hasRole("R01") //개발 완료 후 최종 수정
+                        .requestMatchers(new AntPathRequestMatcher("/**")).permitAll() //개발 완료 후 최종 수정
                         .anyRequest().authenticated()
                 )
                 //UsernamePasswordAuthenticationFilter 전에 JwtAuthenticationFilter 실행
