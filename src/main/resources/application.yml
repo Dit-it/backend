@@ -26,5 +26,8 @@ logging:
           descriptor:
             sql: trace
 
+jwt:
+  secret: 031eaa8bbd06df8c52dfb861adc301d27eaf44fb941101feb52b83a59f9b2f73
+
 server:
   port: 8080
