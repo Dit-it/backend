@@ -1,6 +1,6 @@
 package com.example.backend.dto;
 
-import org.locationtech.jts.geom.Geometry;
+import org.geolatte.geom.Geometry;
 
 public interface ObservedMajorTypeOfLitterGroupByCoastResponseInterface {
     String getSigunguName();

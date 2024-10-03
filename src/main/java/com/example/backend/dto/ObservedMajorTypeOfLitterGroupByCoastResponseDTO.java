@@ -1,5 +1,6 @@
 package com.example.backend.dto;
 
+import com.example.backend.util.GeometryConverter;
 import lombok.*;
 import org.locationtech.jts.geom.Geometry;
 
@@ -20,13 +21,14 @@ public class ObservedMajorTypeOfLitterGroupByCoastResponseDTO {
     private Geometry coastGeom;
 
     public ObservedMajorTypeOfLitterGroupByCoastResponseDTO(ObservedMajorTypeOfLitterGroupByCoastResponseInterface itf) {
+        GeometryConverter geometryConverter = new GeometryConverter();
         this.sigunguName = itf.getSigunguName();
         this.sigunguCode = itf.getSigunguCode();
         this.coastName = itf.getCoastName();
         this.coastCode = itf.getCoastCode();
         this.observedMajorLitterName = itf.getObservedMajorLitterName();
         this.observedMajorLitterCode = itf.getObservedMajorLitterCode();
-        this.coastLonlat = itf.getCoastLonlat();
-        this.coastGeom = itf.getCoastGeom();
+        this.coastLonlat = geometryConverter.convert(itf.getCoastLonlat());
+        this.coastGeom = geometryConverter.convert(itf.getCoastGeom());
     }
 }
