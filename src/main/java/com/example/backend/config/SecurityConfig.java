@@ -34,7 +34,10 @@ public class SecurityConfig {
                         //로그인에 대해 모든 요청 허가
                         .requestMatchers(new AntPathRequestMatcher("/login")).permitAll()
                         //이외에는 권한 있어야 가능
-//                        .requestMatchers(new AntPathRequestMatcher("/login/test")).hasRole("R01") //개발 완료 후 최종 수정
+//                        .requestMatchers(new AntPathRequestMatcher("/api/v1/cleanup")).hasRole("R03") //개발 완료 후 최종 수정
+//                        .requestMatchers(new AntPathRequestMatcher("/api/v1/coast")).hasAnyRole("R01", "R02", "R03", "R04", "R05") //개발 완료 후 최종 수정
+//                        .requestMatchers(new AntPathRequestMatcher("/api/v1/observe")).hasAnyRole("R02") //개발 완료 후 최종 수정
+//                        .requestMatchers(new AntPathRequestMatcher("/api/v1/litter")).hasAnyRole("R01", "R02", "R03", "R04", "R05") //개발 완료 후 최종 수정
                         .requestMatchers(new AntPathRequestMatcher("/**")).permitAll() //개발 완료 후 최종 수정
                         .anyRequest().authenticated()
                 )
