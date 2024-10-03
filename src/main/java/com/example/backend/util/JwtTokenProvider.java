@@ -1,6 +1,8 @@
 package com.example.backend.util;
 
 import com.example.backend.dto.JwtToken;
+import com.example.backend.entity.MemberInfo;
+import com.example.backend.entity.MemberRoleInfo;
 import io.jsonwebtoken.*;
 import io.jsonwebtoken.io.Decoders;
 import io.jsonwebtoken.security.Keys;
@@ -67,17 +69,19 @@ public class JwtTokenProvider {
     public Authentication getAuthentication(String accessToken) {
         // Jwt 토큰 복호화
         Claims claims = parseClaims(accessToken);
-
         if (claims.get("auth") == null) {
             throw new RuntimeException("권한 정보가 없는 토큰입니다.");
         }
+        String auth = claims.get("auth").toString().substring(5);
 
         Collection<? extends GrantedAuthority> authorities = Arrays.stream(claims.get("auth").toString().split(","))
                 .map(SimpleGrantedAuthority::new)
                 .collect(Collectors.toList());
 
         UserDetails principal = new User(claims.getSubject(), "", authorities);
-        return new UsernamePasswordAuthenticationToken(principal, "", authorities);
+        return new UsernamePasswordAuthenticationToken(
+                MemberInfo.builder().memberId(principal.getUsername()).roleCode(
+                        MemberRoleInfo.builder().roleCode(auth).build()).build(), "", authorities);
 
     }
 
