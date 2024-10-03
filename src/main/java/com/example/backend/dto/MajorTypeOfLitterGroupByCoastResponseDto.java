@@ -1,6 +1,7 @@
 package com.example.backend.dto;
 
 import lombok.*;
+import org.locationtech.jts.geom.Geometry;
 
 @Getter
 @Setter
@@ -11,9 +12,9 @@ public class MajorTypeOfLitterGroupByCoastResponseDto {
 
     private String sigunguCode;
     private String sigunguName;
-    private String coastCode;
+    private Integer coastCode;
     private String coastName;
-    private String coastGeom;
+    private Geometry coastGeom;
     private String litterTypeName;
     private Integer totalCleanupLitter;
 
