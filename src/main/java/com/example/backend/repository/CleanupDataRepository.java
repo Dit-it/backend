@@ -26,4 +26,6 @@ public interface CleanupDataRepository extends JpaRepository<CleanupData, Intege
             "WHERE date(cd.cleanup_dt) BETWEEN ?1 AND ?2 " +
             "GROUP BY si.sigungu_code, si.sigungu_name, si.coast_len", nativeQuery = true)
     List<TotalCleanupLitterResponseInterface> totalCollectedLitterByCoast(LocalDate startDate, LocalDate endDate);
+
+    List<CleanupData> findAllByCollectionStatusFalse();
 }

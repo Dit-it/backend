@@ -1,9 +1,6 @@
 package com.example.backend.controller;
 
-import com.example.backend.dto.CleanupStatsDataRequestDto;
-import com.example.backend.dto.CleanupDataGroupByCoastResponseDto;
-import com.example.backend.dto.MajorTypeOfLitterGroupByCoastResponseDto;
-import com.example.backend.dto.TotalCleanupLitterGroupBySigunguResponseDto;
+import com.example.backend.dto.*;
 import com.example.backend.service.CleanupDataService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -58,5 +55,28 @@ public class CleanupDataController {
         return ResponseEntity.ok().body(cleanupData);
     }
 
+    /**
+     * @param dto requestDTO
+     * @return save result
+     */
+    @PostMapping("")
+    public ResponseEntity<?> saveCleanupData(SaveCleanupDataRequestDTO dto) {
+//      TODO: get userId from jwt after login finished
+        boolean result = cleanupDataService.saveCleanupData(dto, "user01");
+        return ResponseEntity.ok().body(result);
+    }
+
+    @PutMapping("/collect/{cleanupDataId}")
+    public ResponseEntity<?> collectCleanup(@PathVariable(name = "cleanupDataId") int cleanupDataId) {
+//      TODO: get userId from jwt after login finished
+        boolean result = cleanupDataService.collectCleanup(cleanupDataId, "user06");
+        return ResponseEntity.ok().body(result);
+    }
+
+    @GetMapping("/uncollected")
+    public ResponseEntity<?> getAllUncollectedCleanupData() {
+        List<UncollectedCleanupDataResponseDTO> uncollectedCleanupDataResponseDTOList = cleanupDataService.getAllUncollectedCleanupData();
+        return ResponseEntity.ok().body(uncollectedCleanupDataResponseDTOList);
+    }
 
 }

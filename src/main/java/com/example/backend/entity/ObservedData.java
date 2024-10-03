@@ -4,9 +4,15 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.NoArgsConstructor;
 
 import java.time.LocalDateTime;
 
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
 @Entity
 public class ObservedData {
 
@@ -22,6 +28,6 @@ public class ObservedData {
     private String observedPicture;
     private LocalDateTime observedDt;
     @ManyToOne
-    @JoinColumn(name = "cleanup_major_litter")
-    private TypesOfLitter cleanupMajorLitter;
+    @JoinColumn(name = "observed_major_litter")
+    private TypesOfLitter observedMajorLitter;
 }

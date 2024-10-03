@@ -1,4 +1,6 @@
 spring:
+  profiles:
+    default: prod
   application:
     name: did-it-backend
   datasource:
@@ -23,10 +25,6 @@ logging:
         type:
           descriptor:
             sql: trace
-
-file:
-  path:
-    img: /img
 
 server:
   port: 8080

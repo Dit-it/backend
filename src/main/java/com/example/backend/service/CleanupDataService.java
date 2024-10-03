@@ -1,9 +1,6 @@
 package com.example.backend.service;
 
-import com.example.backend.dto.CleanupStatsDataRequestDto;
-import com.example.backend.dto.CleanupDataGroupByCoastResponseDto;
-import com.example.backend.dto.MajorTypeOfLitterGroupByCoastResponseDto;
-import com.example.backend.dto.TotalCleanupLitterGroupBySigunguResponseDto;
+import com.example.backend.dto.*;
 
 import java.util.List;
 
@@ -14,5 +11,11 @@ public interface CleanupDataService {
 
     List<TotalCleanupLitterGroupBySigunguResponseDto> totalCollectedLitterByCoast(CleanupStatsDataRequestDto cleanupStatsDataRequestDto);
 
+    boolean saveCleanupData(SaveCleanupDataRequestDTO dto, String memberId);
+
     List<MajorTypeOfLitterGroupByCoastResponseDto> MajorTypeOfLitterGroupByCoast(CleanupStatsDataRequestDto cleanupStatsDataRequestDto);
+
+    boolean collectCleanup(Integer cleanupDataId, String driverMemberId);
+
+    List<UncollectedCleanupDataResponseDTO> getAllUncollectedCleanupData();
 }

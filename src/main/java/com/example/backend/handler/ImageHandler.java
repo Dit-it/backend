@@ -1,5 +1,7 @@
 package com.example.backend.handler;
 
+import jakarta.servlet.ServletContext;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;
@@ -11,10 +13,12 @@ import java.time.LocalDate;
 import java.util.UUID;
 
 @Component
+@RequiredArgsConstructor
 public class ImageHandler {
 
     @Value("${file.path.img}")
     private String imgSaveRootPath;
+    private final ServletContext servletContext;
 
     /**
      * save image to save path
@@ -23,9 +27,23 @@ public class ImageHandler {
      */
     public String saveImage(MultipartFile image) throws IOException {
         // make full file path
-        String fileFullPath = imgSaveRootPath + getTodayDateSubPath() + "/" + getHashFileName() + "." + getExtension(image);
+        String todayDateSubPath = imgSaveRootPath + getTodayDateSubPath();
+        // make sub path directories if they didn't exist
+        boolean result = makeSubDirectories(todayDateSubPath);
+        if (!result) {
+            throw new IOException("Failed to create subdirectories");
+        }
+        String fileFullPath = todayDateSubPath + "/" + getHashFileName() + "." + getExtension(image);
         image.transferTo(new File(fileFullPath));
         return fileFullPath;
+    }
+
+    private boolean makeSubDirectories(String dateSubPath) {
+        File subDirectories = new File(dateSubPath);
+        if (!subDirectories.exists()) {
+            return subDirectories.mkdirs();
+        }
+        return true;
     }
 
     private String getTodayDateSubPath() {
