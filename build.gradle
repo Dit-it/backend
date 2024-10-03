@@ -43,7 +43,12 @@ dependencies {
     implementation 'org.locationtech.jts:jts-core:1.19.0'
     // spatial
     implementation 'org.hibernate:hibernate-spatial:6.5.2.Final'
+    //spring security
+    implementation "org.springframework.boot:spring-boot-starter-security"
+
 }
+
+ext['spring-security.version']='6.3.3'
 
 // queryDSL 추가 : QueryDSL 빌드 옵션
 def querydslDir = "build/generated/querydsl"
