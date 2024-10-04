@@ -1,7 +1,9 @@
 #!/usr/bin/env bash
 
 # build gradle
-./gradlew build -Pprofile=prod
+chmod 750 ./gradlew
+./gradlew clean
+./gradlew build --no-daemon --refresh-dependencies
 
 docker stop backend
 docker rm backend
