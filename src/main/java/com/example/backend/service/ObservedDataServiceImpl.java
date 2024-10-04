@@ -1,5 +1,6 @@
 package com.example.backend.service;
 
+import com.example.backend.dto.ObservedEstimationLitterGroupByCoastResponseDTO;
 import com.example.backend.dto.ObservedMajorTypeOfLitterGroupByCoastResponseDTO;
 import com.example.backend.dto.ObservedMajorTypeOfLitterGroupByCoastResponseInterface;
 import com.example.backend.dto.RegisterObservedDataRequestDTO;
@@ -67,6 +68,17 @@ public class ObservedDataServiceImpl implements ObservedDataService {
                 observedDataRepository.searchObservedMajorLitterByCoast(startDate, endDate)
                 .stream().map(ObservedMajorTypeOfLitterGroupByCoastResponseDTO::new)
                 .toList();
+
+        return dtoList;
+    }
+
+    @Override
+    public List<ObservedEstimationLitterGroupByCoastResponseDTO> searchObservedEstimationLitterByCoast(LocalDate startDate, LocalDate endDate) {
+
+        List<ObservedEstimationLitterGroupByCoastResponseDTO> dtoList =
+                observedDataRepository.searchObservedEstimationLitterByCoast(startDate, endDate)
+                        .stream().map(ObservedEstimationLitterGroupByCoastResponseDTO::new)
+                        .toList();
 
         return dtoList;
     }

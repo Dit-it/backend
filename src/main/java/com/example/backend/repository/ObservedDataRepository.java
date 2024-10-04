@@ -1,5 +1,7 @@
 package com.example.backend.repository;
 
+import com.example.backend.dto.ObservedEstimationLitterGroupByCoastResponseDTO;
+import com.example.backend.dto.ObservedEstimationLitterGroupByCoastResponseInterface;
 import com.example.backend.dto.ObservedMajorTypeOfLitterGroupByCoastResponseInterface;
 import com.example.backend.entity.ObservedData;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -28,5 +30,17 @@ public interface ObservedDataRepository extends JpaRepository<ObservedData, Stri
             "GROUP BY sub.coast_code, c.coast_name, s.sigungu_name, s.sigungu_code, c.coast_lonlat, c.coast_geom",
             nativeQuery = true)
     List<ObservedMajorTypeOfLitterGroupByCoastResponseInterface> searchObservedMajorLitterByCoast(LocalDate startDate, LocalDate endDate);
+
+    @Query(value = "SELECT s.sigungu_name AS sigunguName, s.sigungu_code AS sigunguCode, " +
+            "c.coast_name AS coastName, d.coast_code AS coastCode, " +
+            "SUM(d.estimation_liter) AS estimation_liter_sum, " +
+            "c.coast_lonlat AS coastLonlat, c.coast_geom AS coastGeom " +
+            "FROM public.observed_data d " +
+            "JOIN public.coast_manage_info c ON d.coast_code = c.coast_code " +
+            "JOIN public.sigungu_info s ON c.sigungu_code = s.sigungu_code " +
+            "WHERE d.observed_dt BETWEEN :startDate AND :endDate " +
+            "GROUP BY s.sigungu_name, s.sigungu_code, c.coast_name, d.coast_code, c.coast_lonlat, c.coast_geom",
+            nativeQuery = true)
+    List<ObservedEstimationLitterGroupByCoastResponseInterface> searchObservedEstimationLitterByCoast(LocalDate startDate, LocalDate endDate);
 
 }

@@ -54,4 +54,19 @@ public class ObservedDataController {
 
         return ResponseEntity.ok().body(responseDTOList);
     }
+
+    @GetMapping("/estimationLitterByCoast/{startDate}/{endDate}")
+    public ResponseEntity<?> searchObservedEstimationLitterByCoast(
+            @PathVariable @DateTimeFormat(pattern = "yyyy-mm-dd") LocalDate startDate
+            , @PathVariable @DateTimeFormat(pattern = "yyyy-mm-dd") LocalDate endDate
+    ) {
+
+        log.info("/api/v1/observe/estimationLitterByCoast/{}/{} - Get !!", startDate, endDate);
+
+        List<ObservedMajorTypeOfLitterGroupByCoastResponseDTO> responseDTOList =
+                observedDataService.searchObservedMajorLitterByCoast(startDate, endDate);
+
+        return ResponseEntity.ok().body(responseDTOList);
+    }
+
 }
