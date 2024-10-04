@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
 
 # build gradle
+chmod 750 ./gradlew
 ./gradlew build -Pprofile=prod
 
 docker stop backend
