@@ -17,18 +17,17 @@ public class ObservedMajorTypeOfLitterGroupByCoastResponseDTO {
     private Integer coastCode;
     private String observedMajorLitterName;
     private String observedMajorLitterCode;
-    private Geometry coastLonlat;
-    private Geometry coastGeom;
+    private String coastLonlat;
+    private String coastGeom;
 
     public ObservedMajorTypeOfLitterGroupByCoastResponseDTO(ObservedMajorTypeOfLitterGroupByCoastResponseInterface itf) {
-        GeometryConverter geometryConverter = new GeometryConverter();
         this.sigunguName = itf.getSigunguName();
         this.sigunguCode = itf.getSigunguCode();
         this.coastName = itf.getCoastName();
         this.coastCode = itf.getCoastCode();
         this.observedMajorLitterName = itf.getObservedMajorLitterName();
         this.observedMajorLitterCode = itf.getObservedMajorLitterCode();
-        this.coastLonlat = geometryConverter.convert(itf.getCoastLonlat());
-        this.coastGeom = geometryConverter.convert(itf.getCoastGeom());
+        this.coastLonlat = itf.getCoastLonlat();
+        this.coastGeom = itf.getCoastGeom();
     }
 }

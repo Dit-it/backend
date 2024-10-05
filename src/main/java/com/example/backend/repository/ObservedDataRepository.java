@@ -13,9 +13,9 @@ import java.util.List;
 public interface ObservedDataRepository extends JpaRepository<ObservedData, String> {
 
     @Query(value = "SELECT s.sigungu_name, s.sigungu_code, c.coast_name, sub.coast_code, " +
-            "STRING_AGG(t.litter_type_name, ', ') AS observed_major_litter_code, " +
-            "STRING_AGG(sub.observed_major_litter, ', ') AS observed_major_litter_name, " +
-            "c.coast_lonlat, c.coast_geom " +
+            "STRING_AGG(t.litter_type_name, ', ') AS observed_major_litter_name, " +
+            "STRING_AGG(sub.observed_major_litter, ', ') AS observed_major_litter_code, " +
+            "ST_AsGeoJSON(c.coast_lonlat)::jsonb as coast_lonlat, ST_AsGeoJSON(c.coast_geom)::jsonb as coast_geom " +
             "FROM ( " +
             "   SELECT coast_code, observed_major_litter, COUNT(observed_major_litter) AS major_count, " +
             "          RANK() OVER (PARTITION BY coast_code ORDER BY COUNT(observed_major_litter) DESC) AS rk " +
@@ -34,7 +34,7 @@ public interface ObservedDataRepository extends JpaRepository<ObservedData, Stri
     @Query(value = "SELECT s.sigungu_name AS sigunguName, s.sigungu_code AS sigunguCode, " +
             "c.coast_name AS coastName, d.coast_code AS coastCode, " +
             "SUM(d.estimation_liter) AS estimation_liter_sum, " +
-            "c.coast_lonlat AS coastLonlat, c.coast_geom AS coastGeom " +
+            "ST_AsGeoJSON(c.coast_lonlat)::jsonb AS coast_lonlat, ST_AsGeoJSON(c.coast_geom)::jsonb AS coast_geom " +
             "FROM public.observed_data d " +
             "JOIN public.coast_manage_info c ON d.coast_code = c.coast_code " +
             "JOIN public.sigungu_info s ON c.sigungu_code = s.sigungu_code " +

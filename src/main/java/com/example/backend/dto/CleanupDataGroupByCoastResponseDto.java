@@ -16,7 +16,7 @@ public class CleanupDataGroupByCoastResponseDto {
     private Date cleanupDate;
     private Integer coastCode;
     private String coastName;
-    private Geometry coastGeom;
+    private String coastGeom;
     private Integer totalCleanupLitter;
 
 }
