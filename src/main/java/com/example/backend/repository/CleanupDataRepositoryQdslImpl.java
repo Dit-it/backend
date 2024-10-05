@@ -36,12 +36,11 @@ public class CleanupDataRepositoryQdslImpl implements CleanupDataRepositoryQdsl 
 
 
 
-        // 시군코드, 시군이름, 일자, 해안코드, 해안명, 해안폴리곤, 수거량
+        // 시군코드, 시군이름, 해안코드, 해안명, 해안폴리곤, 수거량
         return jpaQueryFactory.select(
                         Projections.constructor(CleanupDataGroupByCoastResponseDto.class
                         , sigunguInfo.sigunguCode
                         , sigunguInfo.sigunguName
-                        , cleanupDateTemplate.as("cleanupDate") // 여기서 DateTemplate 사용
                         , coastManageInfo.coastCode
                         , coastManageInfo.coastName
                         , coastManageInfo.coastGeom
@@ -56,7 +55,6 @@ public class CleanupDataRepositoryQdslImpl implements CleanupDataRepositoryQdsl 
                 .groupBy(
                         sigunguInfo.sigunguCode
                         , sigunguInfo.sigunguName
-                        , cleanupDateTemplate
                         , coastManageInfo.coastCode
                         , coastManageInfo.coastName
                 )
