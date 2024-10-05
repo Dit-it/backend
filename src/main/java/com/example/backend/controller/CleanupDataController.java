@@ -26,7 +26,7 @@ public class CleanupDataController {
     ){
         log.info("/api/v1/cleanup/cleanupDataGroupBySigungu/{}/{} - GET !!", startDate, endDate);
 
-        List<CleanupDataGroupByCoastResponseDto> cleanupData = cleanupDataService.cleanupDataGroupBySigungu(new CleanupStatsDataRequestDto(startDate, endDate));
+        List<CleanupDataGroupByCoastResponseDto> cleanupData = cleanupDataService.cleanupDataGroupBySigungu(startDate, endDate);
         System.out.println("cleanupData = " + cleanupData);
         return ResponseEntity.ok().body(cleanupData);
     }

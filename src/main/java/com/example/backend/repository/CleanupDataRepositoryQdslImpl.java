@@ -28,39 +28,39 @@ public class CleanupDataRepositoryQdslImpl implements CleanupDataRepositoryQdsl 
     DateTemplate<Date> cleanupDateTemplate = Expressions.dateTemplate(Date.class, "DATE({0})", cleanupData.cleanupDt);
 
 
-    @Override
-    public List<CleanupDataGroupByCoastResponseDto> cleanupDataGroupBySigungu(CleanupStatsDataRequestDto cleanupStatsDataRequestDto) {
-
-        DateTemplate<Date> startDate = Expressions.dateTemplate(Date.class, "DATE({0})", cleanupStatsDataRequestDto.getStartDate());
-        DateTemplate<Date> endDate = Expressions.dateTemplate(Date.class, "DATE({0})", cleanupStatsDataRequestDto.getEndDate());
-
-
-
-        // 시군코드, 시군이름, 해안코드, 해안명, 해안폴리곤, 수거량
-        return jpaQueryFactory.select(
-                        Projections.constructor(CleanupDataGroupByCoastResponseDto.class
-                        , sigunguInfo.sigunguCode
-                        , sigunguInfo.sigunguName
-                        , coastManageInfo.coastCode
-                        , coastManageInfo.coastName
-                        , coastManageInfo.coastGeom
-                        , cleanupData.totalCleanupLitter.sum().as("totalCleanupLitter")
-                        ))
-                .from(cleanupData)
-                .join(observedData).on(cleanupData.observedDataId.eq(observedData))
-                .join(coastManageInfo).on(observedData.coastCode.eq(coastManageInfo))
-                .join(sigunguInfo).on(coastManageInfo.sigunguCode.eq(sigunguInfo))
-                .where(cleanupDateTemplate.goe(startDate),
-                        cleanupDateTemplate.loe(endDate))
-                .groupBy(
-                        sigunguInfo.sigunguCode
-                        , sigunguInfo.sigunguName
-                        , coastManageInfo.coastCode
-                        , coastManageInfo.coastName
-                )
-                .fetch();
-
-    }
+//    @Override
+//    public List<CleanupDataGroupByCoastResponseDto> cleanupDataGroupBySigungu(CleanupStatsDataRequestDto cleanupStatsDataRequestDto) {
+//
+//        DateTemplate<Date> startDate = Expressions.dateTemplate(Date.class, "DATE({0})", cleanupStatsDataRequestDto.getStartDate());
+//        DateTemplate<Date> endDate = Expressions.dateTemplate(Date.class, "DATE({0})", cleanupStatsDataRequestDto.getEndDate());
+//
+//
+//
+//        // 시군코드, 시군이름, 해안코드, 해안명, 해안폴리곤, 수거량
+//        return jpaQueryFactory.select(
+//                        Projections.constructor(CleanupDataGroupByCoastResponseDto.class
+//                        , sigunguInfo.sigunguCode
+//                        , sigunguInfo.sigunguName
+//                        , coastManageInfo.coastCode
+//                        , coastManageInfo.coastName
+//                        , coastManageInfo.coastGeom
+//                        , cleanupData.totalCleanupLitter.sum().as("totalCleanupLitter")
+//                        ))
+//                .from(cleanupData)
+//                .join(observedData).on(cleanupData.observedDataId.eq(observedData))
+//                .join(coastManageInfo).on(observedData.coastCode.eq(coastManageInfo))
+//                .join(sigunguInfo).on(coastManageInfo.sigunguCode.eq(sigunguInfo))
+//                .where(cleanupDateTemplate.goe(startDate),
+//                        cleanupDateTemplate.loe(endDate))
+//                .groupBy(
+//                        sigunguInfo.sigunguCode
+//                        , sigunguInfo.sigunguName
+//                        , coastManageInfo.coastCode
+//                        , coastManageInfo.coastName
+//                )
+//                .fetch();
+//
+//    }
 
     @Override
     public List<MajorTypeOfLitterGroupByCoastResponseDto> MajorTypeOfLitterGroupByCoast(CleanupStatsDataRequestDto cleanupStatsDataRequestDto) {

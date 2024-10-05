@@ -50,7 +50,7 @@ public class ExcelDownloadController {
         } else if ("observedEstimation".equals(screen)) {
             excelFile = excelDownload.makeExcelFile(observedDataService.searchObservedEstimationLitterByCoast(startDate, endDate), screen);
         } else if ("cleanupEstimation".equals(screen)) {
-            excelFile = excelDownload.makeExcelFile(cleanupDataService.cleanupDataGroupBySigungu(new CleanupStatsDataRequestDto(startDate, endDate)),screen);
+            excelFile = excelDownload.makeExcelFile(cleanupDataService.cleanupDataGroupBySigungu(startDate, endDate),screen);
         } else if ("totEstimation".equals(screen)) {
             excelFile = excelDownload.makeExcelFile(cleanupDataService.totalCollectedLitterByCoast(new CleanupStatsDataRequestDto(startDate, endDate)), screen);
         }
