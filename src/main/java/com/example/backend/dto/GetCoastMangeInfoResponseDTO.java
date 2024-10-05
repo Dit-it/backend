@@ -18,7 +18,7 @@ public class GetCoastMangeInfoResponseDTO {
     private String coastName;
     private double coastlineLen;
     private String coastLonlat;
-    private SigunguInfo sigunguCode;
+    private String sigunguCode;
     private String coastGeom;
 
     public GetCoastMangeInfoResponseDTO(CoastManageInfo coastManageInfo) {
@@ -26,7 +26,7 @@ public class GetCoastMangeInfoResponseDTO {
         this.coastName = coastManageInfo.getCoastName();
         this.coastlineLen = coastManageInfo.getCoastlineLen();
         this.coastLonlat = coastManageInfo.getCoastLonlat();
-        this.sigunguCode = coastManageInfo.getSigunguCode();
+        this.sigunguCode = coastManageInfo.getSigunguCode().getSigunguCode();
         this.coastGeom = coastManageInfo.getCoastGeom();
     }
 
