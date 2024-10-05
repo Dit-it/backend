@@ -14,4 +14,5 @@ public class TypesOfLitter {
     private String litterTypeCode;
     private String litterTypeName;
     private String litterColor;
+    private String litterIcon;
 }
