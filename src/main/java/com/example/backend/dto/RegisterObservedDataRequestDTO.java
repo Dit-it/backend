@@ -26,13 +26,13 @@ public class RegisterObservedDataRequestDTO {
     private LocalDateTime observedDt;
     private String litterTypeCode;
 
-    public RegisterObservedDataRequestDTO(String userId, RegisterObservedDataRequestDTO dto, MultipartFile observedPicture) throws IOException {
+    public RegisterObservedDataRequestDTO(String userId, RegisterObservedDataRequestDTO dto) throws IOException {
 
         this.observedDataId = generateObservedDataId(dto);
         this.memberId = userId;
         this.coastCode = dto.getCoastCode();
         this.estimationLiter = dto.getEstimationLiter();
-        this.observedPicture = observedPicture;
+        this.observedPicture = dto.getObservedPicture();
         this.observedDt = dto.getObservedDt();
         this.litterTypeCode = dto.getLitterTypeCode();
     }
@@ -42,6 +42,8 @@ public class RegisterObservedDataRequestDTO {
         return dto.getObservedDt().format(formatter) + String.format("%04d", dto.getCoastCode());   // 연 + 월 + 일 + 시 + 분 + 해안코드  => 조사데이터 일련번호 생성
     }
 
-
+    public void setObservedDt(String observedDt) {
+        this.observedDt = LocalDateTime.parse(observedDt, DateTimeFormatter.ofPattern("yyyyMMddHHmm"));
+    }
 
 }
