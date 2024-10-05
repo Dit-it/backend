@@ -14,8 +14,10 @@ import org.locationtech.jts.geom.PrecisionModel;
 import org.springframework.stereotype.Service;
 
 import java.io.IOException;
+import java.time.LocalDate;
 import java.util.List;
 import java.util.NoSuchElementException;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -47,6 +49,11 @@ public class CleanupDataServiceImpl implements CleanupDataService {
     @Override
     public List<MajorTypeOfLitterGroupByCoastResponseDto> MajorTypeOfLitterGroupByCoast(CleanupStatsDataRequestDto cleanupStatsDataRequestDto) {
         return cleanupDataRepositoryQdsl.MajorTypeOfLitterGroupByCoast(cleanupStatsDataRequestDto);
+    }
+
+    @Override
+    public List<MajorTypeOfLitterGroupByCoastResponseDto> MajorTypeOfLitterGroupBySigungu(LocalDate startDate, LocalDate endDate) {
+        return cleanupDataRepository.MajorTypeOfLitterGroupBySigungu(startDate, endDate).stream().map(MajorTypeOfLitterGroupByCoastResponseDto::new).collect(Collectors.toList());
     }
 
     @Override

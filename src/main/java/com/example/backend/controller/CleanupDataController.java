@@ -55,6 +55,18 @@ public class CleanupDataController {
         return ResponseEntity.ok().body(cleanupData);
     }
 
+    @GetMapping("/MajorTypeOfLitterGroupBySigungu/{startDate}/{endDate}")
+    public ResponseEntity<?> MajorTypeOfLitterGroupBySigungu(
+            @PathVariable @DateTimeFormat(pattern = "yyyy-mm-dd") LocalDate startDate
+            , @PathVariable @DateTimeFormat(pattern = "yyyy-mm-dd") LocalDate endDate
+    ){
+        log.info("/api/v1/cleanup/MajorTypeOfLitterGroupBySigungu/{}/{} - GET !!", startDate, endDate);
+
+        List<MajorTypeOfLitterGroupByCoastResponseDto> cleanupData = cleanupDataService.MajorTypeOfLitterGroupBySigungu(startDate, endDate);
+        System.out.println("cleanupData = " + cleanupData);
+        return ResponseEntity.ok().body(cleanupData);
+    }
+
     /**
      * @param dto requestDTO
      * @return save result

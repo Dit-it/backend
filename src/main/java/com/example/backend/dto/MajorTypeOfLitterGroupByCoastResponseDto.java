@@ -18,4 +18,11 @@ public class MajorTypeOfLitterGroupByCoastResponseDto {
     private String litterTypeName;
     private Integer totalCleanupLitter;
 
+    public MajorTypeOfLitterGroupByCoastResponseDto (MajorTypeOfLitterGroupByCoastResponseInterface interfaceDto){
+        this.sigunguCode = interfaceDto.getSigunguCode();
+        this.sigunguName = interfaceDto.getSigunguName();
+        this.litterTypeName = interfaceDto.getLitterTypeName();
+        this.totalCleanupLitter = interfaceDto.getTotalCleanupLitter();
+    }
+
 }
