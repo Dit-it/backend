@@ -7,7 +7,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.security.servlet.SecurityAutoConfiguration;
 @OpenAPIDefinition(
         servers = {
-                @Server(url="www.didit.store", description = "Default Server url")
+                @Server(url="/", description = "Default Server url")
         }
 )
 @SpringBootApplication(exclude = SecurityAutoConfiguration.class)
