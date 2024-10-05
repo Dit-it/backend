@@ -15,13 +15,13 @@ public class CoastManageInfoServiceImpl implements CoastManageInfoService{
 
     @Override
     public List<GetCoastMangeInfoResponseDTO> getCoastManageInfoList() {
-        return coastManageInfoRepository.findAll().stream()
+        return coastManageInfoRepository.findAllCoastInfo().stream()
                 .map(GetCoastMangeInfoResponseDTO::new).toList();
     }
 
     @Override
     public List<GetCoastMangeInfoResponseDTO> getCoastManageInfoListBySigungu(String sigunguCode) {
-        return coastManageInfoRepository.findAllBySigunguCode_SigunguCode(sigunguCode)
+        return coastManageInfoRepository.findAllBySigunguCode(sigunguCode)
                 .stream().map(GetCoastMangeInfoResponseDTO::new).toList();
     }
 }

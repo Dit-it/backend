@@ -9,6 +9,6 @@ public interface ObservedMajorTypeOfLitterGroupByCoastResponseInterface {
     Integer getCoastCode();
     String getObservedMajorLitterName();
     String getObservedMajorLitterCode();
-    Geometry getCoastLonlat();
-    Geometry getCoastGeom();
+    String getCoastLonlat();
+    String getCoastGeom();
 }

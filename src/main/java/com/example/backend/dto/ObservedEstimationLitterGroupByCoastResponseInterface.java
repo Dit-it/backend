@@ -10,7 +10,7 @@ public interface ObservedEstimationLitterGroupByCoastResponseInterface {
     String getCoastName();
     Integer getCoastCode();
     Integer getEstimationLiterSum();
-    Geometry getCoastLonlat();
-    Geometry getCoastGeom();
+    String getCoastLonlat();
+    String getCoastGeom();
 
 }

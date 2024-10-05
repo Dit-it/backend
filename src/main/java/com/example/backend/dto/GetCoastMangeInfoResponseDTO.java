@@ -2,8 +2,10 @@ package com.example.backend.dto;
 
 import com.example.backend.entity.CoastManageInfo;
 import com.example.backend.entity.SigunguInfo;
+import com.example.backend.util.GeometryConverter;
 import lombok.*;
 import org.locationtech.jts.geom.Geometry;
+
 
 @Getter
 @Setter
@@ -15,9 +17,9 @@ public class GetCoastMangeInfoResponseDTO {
     private Integer coastCode;
     private String coastName;
     private double coastlineLen;
-    private Geometry coastLonlat;
+    private String coastLonlat;
     private SigunguInfo sigunguCode;
-    private Geometry coastGeom;
+    private String coastGeom;
 
     public GetCoastMangeInfoResponseDTO(CoastManageInfo coastManageInfo) {
         this.coastCode = coastManageInfo.getCoastCode();
