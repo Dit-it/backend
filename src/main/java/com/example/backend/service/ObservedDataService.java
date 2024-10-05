@@ -13,4 +13,5 @@ public interface ObservedDataService {
     ObservedData regObservedData(RegisterObservedDataRequestDTO regData);
     List<ObservedMajorTypeOfLitterGroupByCoastResponseDTO> searchObservedMajorLitterByCoast(LocalDate startDate, LocalDate endDate);
     List<ObservedEstimationLitterGroupByCoastResponseDTO> searchObservedEstimationLitterByCoast(LocalDate startDate, LocalDate endDate);
+    String isBeforeCleanup(Integer coastCode);
 }

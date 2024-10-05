@@ -24,21 +24,21 @@ public class ObservedDataController {
 
     @PostMapping("/register")
     public ResponseEntity<?> registerObservedData(
-            @RequestPart("observedPicture") MultipartFile observedPicture,
-            @RequestPart("regData") RegisterObservedDataRequestDTO dto) throws IOException {
+            RegisterObservedDataRequestDTO dto) throws IOException {
 
         log.info("/api/v1/observe/register - POST !!");
 
         // TODO: get userId from jwt after login finished
         String userId = "user01";
 
-        RegisterObservedDataRequestDTO newData = new RegisterObservedDataRequestDTO(userId, dto, observedPicture);
+        log.info("dto : {}", dto);
+        RegisterObservedDataRequestDTO newData = new RegisterObservedDataRequestDTO(userId, dto);
 
         if (observedDataService.regObservedData(newData) == null) {
-            return ResponseEntity.badRequest().body("fail-observed-register");
+            return ResponseEntity.badRequest().body(false);
         }
 
-        return ResponseEntity.ok().body("success-observed-register");
+        return ResponseEntity.ok().body(true);
     }
 
     @GetMapping("/majorLitterByCoast/{startDate}/{endDate}")
@@ -67,6 +67,11 @@ public class ObservedDataController {
                 observedDataService.searchObservedMajorLitterByCoast(startDate, endDate);
 
         return ResponseEntity.ok().body(responseDTOList);
+    }
+
+    @GetMapping("/isBeforeCleanup/{coastCode}")
+    public ResponseEntity<?> isBeforeCleanup(@PathVariable Integer coastCode) {
+        return ResponseEntity.ok().body(observedDataService.isBeforeCleanup(coastCode));
     }
 
 }

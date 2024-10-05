@@ -25,7 +25,7 @@ public class SaveCleanupDataRequestDTO {
     private String collectionLocationMemo;
 
     public void setCleanupDt(String cleanupDt) {
-        DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+        DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyyMMddHHmm");
         this.cleanupDt = LocalDateTime.parse(cleanupDt, dateTimeFormatter);
     }
 }
