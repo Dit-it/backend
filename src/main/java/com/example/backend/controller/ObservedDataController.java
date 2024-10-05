@@ -69,4 +69,9 @@ public class ObservedDataController {
         return ResponseEntity.ok().body(responseDTOList);
     }
 
+    @GetMapping("/isBeforeCleanup/{coastCode}")
+    public ResponseEntity<?> isBeforeCleanup(@PathVariable Integer coastCode) {
+        return ResponseEntity.ok().body(observedDataService.isBeforeCleanup(coastCode));
+    }
+
 }

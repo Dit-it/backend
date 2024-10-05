@@ -43,4 +43,17 @@ public interface ObservedDataRepository extends JpaRepository<ObservedData, Stri
             nativeQuery = true)
     List<ObservedEstimationLitterGroupByCoastResponseInterface> searchObservedEstimationLitterByCoast(LocalDate startDate, LocalDate endDate);
 
+    @Query(value = "WITH temp AS ( " +
+            "SELECT * " +
+            "FROM observed_data " +
+            "WHERE coast_code = :coastCode " +
+            "ORDER BY observed_dt DESC " +
+            "LIMIT 1) " +
+            "SELECT observed_data_id " +
+            "FROM temp " +
+            "WHERE NOT EXISTS ( " +
+            "SELECT 1 FROM cleanup_data cd " +
+            "WHERE temp.observed_data_id = cd.observed_data_id)",
+            nativeQuery = true)
+    String isBeforeCleanup(Integer coastCode);
 }

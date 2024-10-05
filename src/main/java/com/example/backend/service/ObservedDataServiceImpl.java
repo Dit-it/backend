@@ -82,4 +82,9 @@ public class ObservedDataServiceImpl implements ObservedDataService {
 
         return dtoList;
     }
+
+    @Override
+    public String isBeforeCleanup(Integer coastCode) {
+        return observedDataRepository.isBeforeCleanup(coastCode);
+    }
 }
