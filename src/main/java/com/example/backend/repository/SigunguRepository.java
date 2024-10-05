@@ -10,6 +10,33 @@ import java.util.List;
 @Repository
 public interface SigunguRepository extends JpaRepository<SigunguInfo, Long> {
 
-    @Query(value = "select sigungu_code, sigungu_name, st_asgeojson(sigungu_lonlat)::jsonb as sigungu_lonlat, st_asgeojson(st_simplify(sigungu_polygon, 0.001))::jsonb as sigungu_polygon, coast_yn from sigungu_info", nativeQuery = true)
+    @Query(value = "WITH polygons AS ( " +
+            "    SELECT " +
+            "        sigungu_code, " +
+            "        sigungu_name, " +
+            "        coast_yn, " +
+            "        sigungu_lonlat, " +
+            "        (ST_Dump(sigungu_polygon)).geom AS sigungu_polygon " +
+            "    FROM sigungu_info " +
+            "), " +
+            "ranked_polygons AS ( " +
+            "    SELECT " +
+            "        sigungu_code, " +
+            "        sigungu_name, " +
+            "        coast_yn, " +
+            "        sigungu_polygon, " +
+            "        sigungu_lonlat, " +
+            "        ROW_NUMBER() OVER (PARTITION BY sigungu_code ORDER BY ST_Area(sigungu_polygon) DESC) AS rank " +
+            "    FROM polygons " +
+            ") " +
+            "SELECT " +
+            "    sigungu_code, " +
+            "    sigungu_name, " +
+            "        coast_yn, " +
+            "        ST_AsGeoJSON(sigungu_lonlat)::jsonb as sigungu_lonlat, " +
+            "    ST_AsGeoJSON(sigungu_polygon)::jsonb AS sigungu_polygon " +
+            "FROM ranked_polygons " +
+            "WHERE rank = 1 " +
+            "ORDER BY ST_Area(sigungu_polygon) DESC;", nativeQuery = true)
     List<SigunguInfo> findSimple();
 }
