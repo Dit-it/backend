@@ -18,8 +18,19 @@ public class GetCoastMangeInfoResponseDTO {
     private String coastName;
     private double coastlineLen;
     private String coastLonlat;
+    private String sigunguName;
     private String sigunguCode;
     private String coastGeom;
+
+    public GetCoastMangeInfoResponseDTO(CoastManagaInfoResponseIntercase coastManageInfo) {
+        this.coastCode = coastManageInfo.getCoastCode();
+        this.coastName = coastManageInfo.getCoastName();
+        this.coastlineLen = coastManageInfo.getCoastlineLen();
+        this.coastLonlat = coastManageInfo.getCoastLonlat();
+        this.sigunguName = coastManageInfo.getSigunguName();
+        this.sigunguCode = coastManageInfo.getSigunguCode();
+        this.coastGeom = coastManageInfo.getCoastGeom();
+    }
 
     public GetCoastMangeInfoResponseDTO(CoastManageInfo coastManageInfo) {
         this.coastCode = coastManageInfo.getCoastCode();
@@ -29,5 +40,4 @@ public class GetCoastMangeInfoResponseDTO {
         this.sigunguCode = coastManageInfo.getSigunguCode().getSigunguCode();
         this.coastGeom = coastManageInfo.getCoastGeom();
     }
-
 }
