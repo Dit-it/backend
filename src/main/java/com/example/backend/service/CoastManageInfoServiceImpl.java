@@ -1,7 +1,6 @@
 package com.example.backend.service;
 
 import com.example.backend.dto.GetCoastMangeInfoResponseDTO;
-import com.example.backend.dto.GetTypesOfLitterResponseDTO;
 import com.example.backend.repository.CoastManageInfoRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -18,5 +17,11 @@ public class CoastManageInfoServiceImpl implements CoastManageInfoService{
     public List<GetCoastMangeInfoResponseDTO> getCoastManageInfoList() {
         return coastManageInfoRepository.findAll().stream()
                 .map(GetCoastMangeInfoResponseDTO::new).toList();
+    }
+
+    @Override
+    public List<GetCoastMangeInfoResponseDTO> getCoastManageInfoListBySigungu(String sigunguCode) {
+        return coastManageInfoRepository.findAllBySigunguCode_SigunguCode(sigunguCode)
+                .stream().map(GetCoastMangeInfoResponseDTO::new).toList();
     }
 }
