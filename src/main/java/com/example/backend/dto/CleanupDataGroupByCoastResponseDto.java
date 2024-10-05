@@ -19,4 +19,13 @@ public class CleanupDataGroupByCoastResponseDto {
     private String coastGeom;
     private Integer totalCleanupLitter;
 
+    public CleanupDataGroupByCoastResponseDto(String sigunguCode, String sigunguName, Integer coastCode, String coastName, String coastGeom, Integer totalCleanupLitter) {
+        this.sigunguCode = sigunguCode;
+        this.sigunguName = sigunguName;
+        this.coastCode = coastCode;
+        this.coastName = coastName;
+        this.coastGeom = coastGeom;
+        this.totalCleanupLitter = totalCleanupLitter;
+    }
+
 }
