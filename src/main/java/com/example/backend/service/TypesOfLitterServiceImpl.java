@@ -15,7 +15,7 @@ public class TypesOfLitterServiceImpl implements TypesOfLitterService {
 
     @Override
     public List<GetTypesOfLitterResponseDTO> getTypesOfLitter() {
-        return typesOfLitterRepository.findAll().stream()
+        return typesOfLitterRepository.findAllByOrderByLitterTypeCode().stream()
                 .map(GetTypesOfLitterResponseDTO::new).toList();
     }
 }
