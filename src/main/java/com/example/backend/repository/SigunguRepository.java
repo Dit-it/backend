@@ -18,6 +18,7 @@ public interface SigunguRepository extends JpaRepository<SigunguInfo, Long> {
             "        sigungu_lonlat, " +
             "        (ST_Dump(sigungu_polygon)).geom AS sigungu_polygon " +
             "    FROM sigungu_info " +
+            "    where coast_yn = true " +
             "), " +
             "ranked_polygons AS ( " +
             "    SELECT " +
