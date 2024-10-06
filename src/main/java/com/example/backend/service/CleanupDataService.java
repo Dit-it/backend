@@ -8,7 +8,7 @@ import java.util.List;
 public interface CleanupDataService {
 
 
-    List<CleanupDataGroupByCoastResponseDto> cleanupDataGroupBySigungu(CleanupStatsDataRequestDto cleanupStatsDataRequestDto);
+    List<CleanupDataGroupByCoastResponseDto> cleanupDataGroupBySigungu(LocalDate startDate, LocalDate endDate);
 
     List<TotalCleanupLitterGroupBySigunguResponseDto> totalCollectedLitterByCoast(CleanupStatsDataRequestDto cleanupStatsDataRequestDto);
 

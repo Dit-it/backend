@@ -1,8 +1,7 @@
 package com.example.backend.repository;
 
 
-import com.example.backend.dto.MajorTypeOfLitterGroupByCoastResponseInterface;
-import com.example.backend.dto.TotalCleanupLitterResponseInterface;
+import com.example.backend.dto.*;
 import com.example.backend.entity.CleanupData;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -54,4 +53,30 @@ public interface CleanupDataRepository extends JpaRepository<CleanupData, Intege
     List<MajorTypeOfLitterGroupByCoastResponseInterface> MajorTypeOfLitterGroupBySigungu(LocalDate startDate, LocalDate endDate);
 
     List<CleanupData> findAllByCollectionStatusFalse();
+
+    @Query(value = "        select " +
+            "            si1_0.sigungu_code, " +
+            "            si1_0.sigungu_name, " +
+            "            cmi1_0.coast_code, " +
+            "            cmi1_0.coast_name, " +
+            "            st_asgeojson(cmi1_0.coast_lonlat) as coast_lonlat, " +
+            "            sum(cd1_0.total_cleanup_litter) as total_cleanup_litter" +
+            "        from " +
+            "            cleanup_data cd1_0 " +
+            "        join " +
+            "            observed_data od1_0 " +
+            "                on cd1_0.observed_data_id=od1_0.observed_data_id " +
+            "        join " +
+            "            coast_manage_info cmi1_0 " +
+            "                on od1_0.coast_code=cmi1_0.coast_code " +
+            "        join " +
+            "            sigungu_info si1_0 " +
+            "                on cmi1_0.sigungu_code=si1_0.sigungu_code " +
+            "        WHERE date(cd1_0.cleanup_dt) BETWEEN ?1 AND ?2 " +
+            "        group by " +
+            "            si1_0.sigungu_code, " +
+            "            si1_0.sigungu_name, " +
+            "            cmi1_0.coast_code, " +
+            "            cmi1_0.coast_name", nativeQuery = true)
+    List<CleanupDataGroupByCoastResponseInterface> cleanupDataGroupBySigungu(LocalDate startDate, LocalDate endDate);
 }

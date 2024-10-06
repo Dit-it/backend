@@ -31,8 +31,8 @@ public class CleanupDataServiceImpl implements CleanupDataService {
     private final ImageHandler imageHandler;
 
     @Override
-    public List<CleanupDataGroupByCoastResponseDto> cleanupDataGroupBySigungu(CleanupStatsDataRequestDto cleanupStatsDataRequestDto) {
-        return cleanupDataRepositoryQdsl.cleanupDataGroupBySigungu(cleanupStatsDataRequestDto);
+    public List<CleanupDataGroupByCoastResponseDto> cleanupDataGroupBySigungu(LocalDate startDate, LocalDate endDate) {
+        return cleanupDataRepository.cleanupDataGroupBySigungu(startDate, endDate).stream().map(CleanupDataGroupByCoastResponseDto::new).collect(Collectors.toList());
     }
 
     @Override
